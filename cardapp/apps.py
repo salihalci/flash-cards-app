@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class MemorycardsappConfig(AppConfig):
+class CardappConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'memorycardsapp'
+    name = 'cardapp'
