@@ -53,7 +53,7 @@ def questionlist(request):
 @login_required
 def current(request):
     if request.method == 'POST':
-
+        
         #populate subject list dublicated need refactor
         slist = Question.objects.filter(user=request.user)
         subjectList = []
@@ -70,11 +70,12 @@ def current(request):
         #end populate subject list
 
         questions = Question.objects.filter(user=request.user,subject=subject)[:int(count)] #Question count
-            
+        question = questions[0] 
         questionCount = len(questions)
 
         return render(request,'cardapp/current.html',{
             'questions':questions,
+            'question':question,
             'subject':subject,
             'questionCount':questionCount,
             'subjectList':subjectList,

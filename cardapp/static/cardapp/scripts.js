@@ -10,6 +10,9 @@ function showHide() {
 
 
   function nextQuestion() {
-    
-    return "questions.0.question";
+    var questionKey = document.getElementById("questionKey").textContent;
+    alert(questionKey);
+    questionKey = questionKey++
+    document.getElementById("questionKey")=questionKey
+
   }
