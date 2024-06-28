@@ -43,7 +43,39 @@ def logoutuser(request):
         logout(request)
         return redirect('home')
 
-
+@login_required
 def questionlist(request):
     questions = Question.objects.filter(user=request.user)
     return render(request,'cardapp/questionlist.html',{'questions':questions})
+
+
+
+@login_required
+def current(request):
+    if request.method == 'POST':
+        
+        subject = request.POST['subjectf']
+        count = request.POST['countf']
+        print(f'subject : {subject}  count: {count}')
+            
+        questions = Question.objects.filter(user=request.user,subject=subject)[:int(count)] #Question count
+            
+        questionCount = len(questions)
+
+        return render(request,'cardapp/current.html',{
+            'questions':questions,
+            'subject':subject,
+            'questionCount':questionCount,
+            })
+        
+    else:
+        slist = Question.objects.filter(user=request.user)
+        subjectList = []
+        
+        #distinct query is not supported by sqlite. So we get all records and calculate distinct results 
+        for x in slist:
+            if x.subject not in subjectList:
+                subjectList.append(x.subject)
+
+        print(subjectList)
+        return render(request,'cardapp/current.html',{'subjectList':subjectList})

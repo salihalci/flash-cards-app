@@ -27,6 +27,7 @@ urlpatterns = [
 
     #pages
     path('questionlist/', views.questionlist, name='questionlist'),
+    path('current/', views.current, name='current'),
 
     # Todos
     path('', views.home, name='home'),
