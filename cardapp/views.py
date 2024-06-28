@@ -5,6 +5,7 @@ from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from .models import Question
 
 # Create your views here.
 def home(request):
@@ -41,3 +42,8 @@ def logoutuser(request):
     if request.method == 'POST':
         logout(request)
         return redirect('home')
+
+
+def questionlist(request):
+    questions = Question.objects.filter(user=request.user)
+    return render(request,'cardapp/questionlist.html',{'questions':questions})

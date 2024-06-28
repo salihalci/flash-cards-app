@@ -24,6 +24,10 @@ urlpatterns = [
     path('login/', views.loginuser, name='loginuser'),
     path('logout/', views.logoutuser, name='logoutuser'),
 
+
+    #pages
+    path('questionlist/', views.questionlist, name='questionlist'),
+
     # Todos
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
