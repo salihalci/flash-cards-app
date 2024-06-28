@@ -50,11 +50,7 @@
 
     <button type="submit" class="btn btn-success" onclick="showHide()" >Show/Hide</button>
     
-    <form action="{% url 'current' %}" method="POST">
-      {% csrf_token %}  
-      <input type="hidden" name="formidx" value="next">
-
-      <button type="submit" class="btn btn-success" >Next &raquo;</button>
-    </form>
+    <button type="submit" class="btn btn-success" >Next &raquo;</button>
+    
 </div>
 {% endif %} {% endblock %}

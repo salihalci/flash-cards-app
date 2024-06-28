@@ -53,11 +53,22 @@ def questionlist(request):
 @login_required
 def current(request):
     if request.method == 'POST':
+
+        #populate subject list dublicated need refactor
+        slist = Question.objects.filter(user=request.user)
+        subjectList = []
+        
+        #distinct query is not supported by sqlite. So we get all records and calculate distinct results 
+        for x in slist:
+            if x.subject not in subjectList:
+                subjectList.append(x.subject)
         
         subject = request.POST['subjectf']
         count = request.POST['countf']
         print(f'subject : {subject}  count: {count}')
-            
+        
+        #end populate subject list
+
         questions = Question.objects.filter(user=request.user,subject=subject)[:int(count)] #Question count
             
         questionCount = len(questions)
@@ -66,9 +77,11 @@ def current(request):
             'questions':questions,
             'subject':subject,
             'questionCount':questionCount,
+            'subjectList':subjectList,
             })
         
     else:
+        #populate subject list
         slist = Question.objects.filter(user=request.user)
         subjectList = []
         
