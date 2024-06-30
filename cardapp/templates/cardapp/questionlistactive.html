@@ -1,0 +1,34 @@
+
+{% extends "cardapp/base.html" %}
+
+{% block content %}
+
+{% if questions %}
+<div class="alert alert-success" role="alert">
+  Subject: {{subject}}
+  <br />{{questionCount}} questions selected.
+ 
+</div>
+{% endif %}
+
+
+{%for questionx in questions%}
+
+  <a href="{% url 'questionlistactive' questionx.id %}">{{forloop.counter}}</a>
+
+{%endfor%}
+
+
+<div class="alert alert-primary" role="alert" id="divquestion" >
+  <label id="lblQuestion"> {{question.question}}</label>
+
+  <button type="submit" class="btn btn-secondary" onclick="showHide()">Show/Hide</button>
+ 
+</div>
+
+<div  class="alert alert-warning" role="alert" id="divanswer" style="display: none;">
+  <label id="lblanswer"> {{question.answer}}</label>
+</div>
+
+
+{%endblock%}

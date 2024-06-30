@@ -1,6 +1,7 @@
 
 function showHide() {
-    var x = document.getElementById("answerdiv");
+
+    var x = document.getElementById("divanswer");
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {
@@ -8,11 +9,3 @@ function showHide() {
     }
   }
 
-
-  function nextQuestion() {
-    var questionKey = document.getElementById("questionKey").textContent;
-    alert(questionKey);
-    questionKey = questionKey++
-    document.getElementById("questionKey")=questionKey
-
-  }

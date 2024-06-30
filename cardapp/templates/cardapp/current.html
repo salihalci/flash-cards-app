@@ -28,33 +28,8 @@
         <option value="30">30</option>
       </select>
     </div>
-    <button type="submit" class="btn btn-primary" alig>Start</button>
+    <button type="submit" class="btn btn-primary">Start</button>
   </form>
 </div>
-{% if questions %}
-<div class="alert alert-success" role="alert">
-  Subject: {{subject}}
-  <br />{{questionCount}} questions selected.
- 
-</div>
 
-<div class="alert alert-dark" role="alert" id="questionF" value>
-    <label id="lblQuestion"> {{question.question}}</label>
-
-</div>
-
-<div class="alert alert-dark" role="alert" id="answerdiv" style="display: none;">{{questions.0.answer}}</div>
-
-<div class="row justify-content-center mt-5">
-    <button type="submit" class="btn btn-success" onclick="showHide()" >&laquo;Previous</button>
-
-    <button type="submit" class="btn btn-success" onclick="showHide()" >Show/Hide</button>
-    
-    <form method="POST" action="{%url 'current'%}">
-     
-      <button type="submit" class="btn btn-success" onclick=nextQuestion()>Next &raquo;</button>
-      
-    </form>
-
-</div>
-{% endif %} {% endblock %}
+{% endblock %}

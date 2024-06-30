@@ -27,6 +27,7 @@ urlpatterns = [
 
     #pages
     path('questionlist/', views.questionlist, name='questionlist'),
+    path('questionlistactive/<int:qid>', views.questionlistactive, name='questionlistactive'),
     path('current/', views.current, name='current'),
 
     # Todos

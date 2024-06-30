@@ -7,6 +7,8 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .models import Question
 
+
+
 # Create your views here.
 def home(request):
     return render(request, 'cardapp/home.html')
@@ -67,19 +69,23 @@ def current(request):
         count = request.POST['countf']
         print(f'subject : {subject}  count: {count}')
         
+        request.session['subject']=subject
+        request.session['count']=count
         #end populate subject list
 
         questions = Question.objects.filter(user=request.user,subject=subject)[:int(count)] #Question count
-        question = questions[0] 
+        question = questions[0]
+        print(type(questions))
         questionCount = len(questions)
-
-        return render(request,'cardapp/current.html',{
+        
+        content ={
             'questions':questions,
             'question':question,
             'subject':subject,
             'questionCount':questionCount,
-            'subjectList':subjectList,
-            })
+        }
+        
+        return render(request,'cardapp/questionlistactive.html',content)
         
     else:
         #populate subject list
@@ -90,6 +96,24 @@ def current(request):
         for x in slist:
             if x.subject not in subjectList:
                 subjectList.append(x.subject)
+        content = {
+            'subjectList':subjectList
+        }
 
         print(subjectList)
-        return render(request,'cardapp/current.html',{'subjectList':subjectList})
+        return render(request,'cardapp/current.html',content)
+
+def questionlistactive(request,qid):
+    subject = request.session['subject']
+    count = request.session['count'] 
+    questions = Question.objects.filter(user=request.user,subject=subject)[:int(count)]
+    question = get_object_or_404(Question,pk=qid,user=request.user)
+    questionCount = len(questions)
+
+    content ={
+            'questions':questions,
+            'subject':subject,
+            'questionCount':questionCount,
+            'question':question,
+        }
+    return render(request,'cardapp/questionlistactive.html',content)
